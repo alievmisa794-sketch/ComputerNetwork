@@ -1,0 +1,22 @@
+enable
+configure terminal
+hostname Router0
+interface GigabitEthernet0/0
+ description LAN0
+ ip address 192.168.10.1 255.255.255.0
+ no shutdown
+exit
+interface GigabitEthernet0/1
+ description Link to Router1
+ ip address 10.0.12.1 255.255.255.252
+ no shutdown
+exit
+router rip
+ version 2
+ no auto-summary
+ network 10.0.0.0
+ network 192.168.10.0
+ passive-interface GigabitEthernet0/0
+exit
+end
+write memory
